@@ -10,20 +10,20 @@ if (len(sys.argv) > 2):
 
 sentence = sys.argv [1]
 print(sentence)
-print("=====================")
+print "====================="
 
 tagger = SyntaxNetProcess("brain_tagger")
 parser = SyntaxNetProcess("brain_parser")
 
 _write_input(sentence)
 tagger.eval()
-print("TAGGER OUTPUT==================")
-print(_read_output())
+print "TAGGER OUTPUT=================="
+print _read_output()
 
 _write_input(_read_output())
 parser.eval()
-print("PARSER OUTPUT==================")
-print(_read_output())
+print "PARSER OUTPUT=================="
+print _read_output()
 
-print("Print as tree:")
+print "Print as tree:"
 pretty_print()

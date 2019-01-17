@@ -45,12 +45,12 @@ def _write_input(sentence):
 	# print "############## WRITING INPUT ###############"
 	# print input_file_path
 	input_file = open(input_file_path, mode="w")
-	input_file.write(sentence)
-	input_file.flush()
+  	input_file.write(sentence)
+  	input_file.flush()
 	input_file.close()
 
 def to_dict(sentence):
-	token_str = list()
+  	token_str = list()
 	# children = [[] for token in sentence.token]
 	children = [[] for i in range(0, len(sentence.token)+1)]
 	roots = []
@@ -63,7 +63,7 @@ def to_dict(sentence):
 			roots.append(i)
 			root = i
 		else:
-			print("appending child:", i , token.word, " - to parent - ", token.head)
+			print "appending child:", i , token.word, " - to parent - ", token.head
 			children[token.head].append(i)
 
 	assert roots, "Couldnt find roots!!"
@@ -72,7 +72,7 @@ def to_dict(sentence):
 		# multiple roots so we make a fake one to be their parent
 		# root = Token(0, 'ROOT', 'ROOT-LEMMA', 'ROOT-CPOS', 'ROOT-POS',
 		# 	None, None, 'ROOT-DEPREL', None, None, None)
-		print(("========== FOUND > 1 ROOT ==========", roots))
+		print ("========== FOUND > 1 ROOT ==========", roots)
 		new_root = '%s %s %s @%d' %("","","",len(token_str))
 		token_str.append(new_root)
 		index_of_new_root = len(token_str) - 1
@@ -116,12 +116,12 @@ def pretty_print():
 				sentence.ParseFromString(d)
 				tr = asciitree.LeftAligned()
 				d = to_dict(sentence)
-				print(('Input: %s' % sentence.text))
+				print('Input: %s' % sentence.text)
 				print('Parse:')
 				tr_str = tr(d)
 				pat = re.compile(r'\s*@\d+$')
 				for tr_ln in tr_str.splitlines():
-					print((pat.sub('', tr_ln)))
+					print(pat.sub('', tr_ln))
 			if finished:
 				break
 
@@ -175,7 +175,7 @@ class SyntaxNetProcess:
 				evaluation_max_steps=max_steps)
 			print("_init: 4")
 			# with tf.Session() as sess:
-			self._sess.run(list(self._parser.inits.values()))
+			self._sess.run(self._parser.inits.values())
 			self._parser.AddSaver(slim_model)
 			self._parser.saver.restore(self._sess, model_path)
 
